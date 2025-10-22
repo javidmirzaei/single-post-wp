@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Beautiful Post
- * Description: طراحی حرفه‌ای و جذاب برای صفحه تک مقاله
- * Version: 1.0.6
+ * Description: طراحی حرفه‌ای و جذاب برای صفحه تک مقاله (فقط برای پست‌های بلاگ)
+ * Version: 1.0.7
  * Author: Arad Branding
  */
 
@@ -42,13 +42,13 @@ class Beautiful_Post_Plugin {
     }
     
     public function enqueue_styles() {
-        if (is_single()) {
+        if (is_single() && get_post_type() === 'post') {
             wp_enqueue_style('beautiful-post', plugin_dir_url(__FILE__) . 'style.css', array(), '1.0');
         }
     }
     
     public function custom_styles() {
-        if (!is_single()) {
+        if (!is_single() || get_post_type() !== 'post') {
             return;
         }
         
@@ -70,13 +70,18 @@ class Beautiful_Post_Plugin {
     }
     
     public function enqueue_scripts() {
-        if (is_single()) {
+        if (is_single() && get_post_type() === 'post') {
             wp_enqueue_script('beautiful-post', plugin_dir_url(__FILE__) . 'script.js', array('jquery'), '1.0', true);
         }
     }
     
     public function modify_single_post_content($content) {
         if (!is_single() || !in_the_loop() || !is_main_query()) {
+            return $content;
+        }
+        
+        // فقط برای پست‌های معمولی (بلاگ) - نه محصولات یا post type های دیگر
+        if (get_post_type() !== 'post') {
             return $content;
         }
         
@@ -331,7 +336,7 @@ class Beautiful_Post_Plugin {
     }
     
     public function custom_comments_template($template) {
-        if (is_single()) {
+        if (is_single() && get_post_type() === 'post') {
             $plugin_template = plugin_dir_path(__FILE__) . 'comments-template.php';
             if (file_exists($plugin_template)) {
                 return $plugin_template;
