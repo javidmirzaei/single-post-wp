@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Beautiful Post
  * Description: طراحی حرفه‌ای و جذاب برای صفحه تک مقاله
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Arad Branding
  */
 
