@@ -261,3 +261,4 @@ wp-content/plugins/beautiful-post/
 برای تجربه بهتر، این پلاگین‌ها را نیز امتحان کنید:
 - **Blog Cards**: نمایش زیبای لیست مقالات
 
+# single-post-wp
